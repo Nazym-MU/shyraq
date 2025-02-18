@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import { clerkMiddleware } from "@clerk/nextjs/server";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
