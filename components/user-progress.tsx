@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import { courses } from '@/db/schema';
 
 type Props = {
-    activeCourse: { imageSrc: string; title: string };
+    activeCourse: typeof courses.$inferSelect;
     streak: number;
     points: number;
     hasStreak: boolean;

@@ -16,10 +16,10 @@ const LearnPage = async () => {
     return (
         <div className="flex flex-row-reverse gap-[48px] px-6">
            <StickyWrapper>
-                <UserProgress activeCourse={{ title: "Kazakh", imageSrc: "/kaz.svg" }} streak={0} points={100} hasStreak={false} />
+                <UserProgress activeCourse={userProgress.activeCourse} streak={userProgress.streak} points={userProgress.points} hasStreak={false} />
            </StickyWrapper>
            <FeedWrapper>
-                <Header title="Kazakh" />
+                <Header title={userProgress.activeCourse.title} />
            </FeedWrapper>
         </div>
     );
