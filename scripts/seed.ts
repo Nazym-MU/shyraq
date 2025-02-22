@@ -13,11 +13,35 @@ const main = async () => {
         console.log("Seeding database...");
         await db.delete(schema.courses);
         await db.delete(schema.userProgress);
+        await db.delete(schema.units);
+        await db.delete(schema.lessons);
+        await db.delete(schema.challenges);
+        await db.delete(schema.challengeOptions);
+        await db.delete(schema.challengeProgress);
 
         await db.insert(schema.courses).values([
             { id: 1, title: "Kazakh", imageSrc: "/kaz.svg" },
             { id: 2, title: "Math", imageSrc: "/math.svg" },
-        ]),
+        ]);
+
+        await db.insert(schema.units).values([
+            { id: 1, courseId: 1, title: "Unit 1", description: "Learn the basics of Kazakh", order: 1 },
+        ]);
+
+        await db.insert(schema.lessons).values([
+            { id: 1, unitId: 1, title: "Greeting", order: 1 },
+        ]);
+
+        await db.insert(schema.challenges).values([
+            { id: 1, lessonId: 1, type: "SELECT", question: "Which is 'hello' in Kazakh?", order: 1 },
+            { id: 2, lessonId: 1, type: "SELECT", question: "What is the word for goodbye in Kazakh?", order: 2 },
+        ]);
+
+        await db.insert(schema.challengeOptions).values([
+            { id: 1, challengeId: 1, text: "Сәлем", correct: true, audioSrc: "/kaz_salem.mp3" },
+            { id: 2, challengeId: 1, text: "Сау бол", correct: false, audioSrc: "/kaz_saubol.mp3" },
+        ]);
+
         console.log("Seeding finished");
 
     } catch (error) {
@@ -25,5 +49,6 @@ const main = async () => {
         throw new Error("Failed to seed database");
     }
 };
+
 
 main();
