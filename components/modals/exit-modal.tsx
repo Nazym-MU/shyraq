@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { Button } from "@/components/ui/button";
 import { useExitModal } from "@/store/use-exit-modal";
 
@@ -27,6 +28,9 @@ export const ExitModal = () => {
                         <Image src="/logo_sad.svg" alt="Logo" height={80} width={80} />
                     </div>
                     <DialogTitle className="text-center font-bold text-2xl">Wait, don&apos;t go</DialogTitle>
+                    <VisuallyHidden>
+                        <DialogTitle className="text-center font-bold text-2xl">Wait, don&apos;t go</DialogTitle>
+                    </VisuallyHidden>
                     <DialogDescription className="text-center text-base">
                         You&apos;re about to leave the lesson. Are you sure you want to do that?
                     </DialogDescription>

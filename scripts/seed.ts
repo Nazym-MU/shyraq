@@ -36,11 +36,18 @@ const main = async () => {
         await db.insert(schema.challenges).values([
             { id: 1, lessonId: 1, type: "SELECT", question: "Which is 'hello' in Kazakh?", order: 1 },
             { id: 2, lessonId: 1, type: "SELECT", question: "What is the word for goodbye in Kazakh?", order: 2 },
+            { id: 3, lessonId: 1, type: "ASSIST", question: "Hello", order: 3 },
         ]);
 
         await db.insert(schema.challengeOptions).values([
-            { id: 1, challengeId: 1, text: "Сәлем", correct: true, audioSrc: "/kaz_salem.mp3" },
-            { id: 2, challengeId: 1, text: "Сау бол", correct: false, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 1, text: "Сәлем", correct: true, audioSrc: "/kaz_salem.mp3" },
+            { challengeId: 1, text: "Сау бол", correct: false, audioSrc: "/kaz_saubol.mp3" },
+
+            { challengeId: 2, text: "Сәлем", correct: false, audioSrc: "/kaz_salem.mp3" },
+            { challengeId: 2, text: "Сау бол", correct: true, audioSrc: "/kaz_saubol.mp3" },
+
+            { challengeId: 3, text: "Сәлем", correct: true, audioSrc: "/kaz_salem.mp3" },
+            { challengeId: 3, text: "Сау бол", correct: false, audioSrc: "/kaz_saubol.mp3" },
         ]);
 
         console.log("Seeding finished");
