@@ -5,7 +5,8 @@ import { toast } from "sonner";
 import Confetti from "react-confetti";
 import { useState, useTransition } from "react";
 import Image from "next/image";
-import { useAudio, useWindowSize } from "react-use";
+import { useAudio, useWindowSize, useMount } from "react-use";
+import { usePracticeModal } from "@/store/use-practice-modal";
 import { QuestionBubble } from "./question-bubble";
 import { Challenge } from "./challenge";
 import { Footer } from "./footer";
@@ -23,6 +24,14 @@ type Props = {
 };
 
 export const Quiz = ({ initialPercentage, initialLessonId, initialLessonChallenges }: Props) => {
+    const { open: openPracticeModal } = usePracticeModal();
+
+    useMount(() => {
+        if (initialPercentage === 100) {
+            openPracticeModal();
+        }
+    });
+
     const { width, height } = useWindowSize();
     const router = useRouter();
     const [finishAudio, _f, finishControls] = useAudio({ src: "/finish.mp3", autoPlay: true });
@@ -30,7 +39,9 @@ export const Quiz = ({ initialPercentage, initialLessonId, initialLessonChalleng
     const [lessonId] = useState(initialLessonId);
     const [incorrectAudio, _i, incorrectControls] = useAudio({ src: "/incorrect.wav" });
     const [pending, startTransition] = useTransition();
-    const [percentage, setPercentage] = useState(initialPercentage);
+    const [percentage, setPercentage] = useState(() => {
+        return initialPercentage === 100 ? 0 : initialPercentage;
+    });
     const [challenges] = useState(initialLessonChallenges);
     const [activeIndex, setActiveIndex] = useState(() => {
         const uncompletedIndex = challenges.findIndex((challenge) => !challenge.completed);
