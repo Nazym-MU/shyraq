@@ -50,6 +50,29 @@ const main = async () => {
             { challengeId: 3, text: "Сау бол", correct: false, audioSrc: "/kaz_saubol.mp3" },
         ]);
 
+        await db.insert(schema.challenges).values([
+            { id: 4, lessonId: 2, type: "SELECT", question: "Which is 'mother'?", order: 1 },
+            { id: 5, lessonId: 2, type: "SELECT", question: "What is the word for 'father'?", order: 2 },
+            { id: 6, lessonId: 2, type: "ASSIST", question: "Mother", order: 3 },
+        ]);
+
+        await db.insert(schema.challengeOptions).values([
+            { challengeId: 4, text: "Ана", correct: true, audioSrc: "/kaz_salem.mp3" },
+            { challengeId: 4, text: "Әпке", correct: false, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 4, text: "Әке", correct: false, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 4, text: "Аға", correct: false, audioSrc: "/kaz_saubol.mp3" },
+
+            { challengeId: 5, text: "Ана", correct: false, audioSrc: "/kaz_salem.mp3" },
+            { challengeId: 5, text: "Әке", correct: true, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 5, text: "Іні", correct: false, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 5, text: "Сіңлі", correct: false, audioSrc: "/kaz_saubol.mp3" },
+
+            { challengeId: 6, text: "Әже", correct: false, audioSrc: "/kaz_salem.mp3" },
+            { challengeId: 6, text: "Ана", correct: true, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 6, text: "Әпке", correct: false, audioSrc: "/kaz_saubol.mp3" },
+            { challengeId: 6, text: "Аға", correct: false, audioSrc: "/kaz_saubol.mp3" },
+        ]);
+
         console.log("Seeding finished");
 
     } catch (error) {
