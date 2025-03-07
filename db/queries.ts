@@ -29,11 +29,14 @@ export const getUnits = cache(async () => {
     }
 
     const data = await db.query.units.findMany({
+        orderBy: (units, { asc }) => [asc(units.order)],
         where: eq(units.courseId, userProgress.activeCourseId),
         with: { 
             lessons: {
+                orderBy: (lessons, { asc }) => [asc(lessons.order)],
                 with: {
                     challenges: {
+                        orderBy: (challenges, { asc }) => [asc(challenges.order)],
                         with: {
                             challengeProgress: {
                                 where: eq(challengeProgress.userId, userId),
